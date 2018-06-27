@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FindYourPath</string>
+    <string name="title_activity_maps">Find Your Path</string>
+    <string name="location">location:</string>
+</resources>
