@@ -46,7 +46,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     Marker firstMarker;
     Marker secondMarker;
     Marker userMarker;
-    boolean firstLocation, path = false;
+    boolean firstLocation, secondLocation = false;
     HashMap<String, Object> userPath = new HashMap<>();
 
     @Override
@@ -187,8 +187,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     MapsActivity.this.setFirstMarker(address.getLocality(),address.getSubLocality(), latLng.latitude, latLng.longitude);
                     userPath.put("first", latLng);
                     Toast.makeText(MapsActivity.this,"please select your destination", Toast.LENGTH_LONG).show();
-                } else if (!path) {
-                    path = true;
+                } else if (!secondLocation) {
+                    secondLocation = true;
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
                     List<Address> userLocationPath = null;
 
@@ -196,7 +196,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         userLocationPath = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        path = false;
+                        secondLocation = false;
                         return;
                     }
                     Address address = userLocationPath.get(0);
@@ -247,7 +247,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         firstMarker.remove();
         secondMarker.remove();
         firstLocation = false;
-        path = false;
+        secondLocation = false;
         userPath.clear();
     });
 
